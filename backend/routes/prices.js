@@ -29,10 +29,17 @@ function extractDomain(url) {
 /**
  * Step 1: Google Shopping search — returns up to 5 product results for the shoe.
  */
-async function searchShopping(brand, model, apiKey) {
+async function searchShopping(brand, model, apiKey, filters = {}) {
+  const { gender, courtType, size } = filters
+  const parts = [brand, model]
+  if (courtType && courtType !== 'All Court') parts.push(courtType)
+  if (gender) parts.push(gender)
+  if (size) parts.push(`UK ${size}`)
+  parts.push('tennis shoe')
+
   const result = await getJson({
     engine: 'google_shopping',
-    q: `${brand} ${model} tennis shoe`,
+    q: parts.join(' '),
     gl: 'uk',
     hl: 'en',
     api_key: apiKey
@@ -56,8 +63,8 @@ async function fetchStores(pageToken, apiKey) {
  * For a shoe, fetch all retailer offers across the top Shopping results.
  * Returns a map of domain → { listedPrice, url } keeping the lowest price per retailer.
  */
-async function getAllRetailerOffers(brand, model, apiKey) {
-  const shoppingResults = await searchShopping(brand, model, apiKey)
+async function getAllRetailerOffers(brand, model, apiKey, filters) {
+  const shoppingResults = await searchShopping(brand, model, apiKey, filters)
 
   // Fetch stores for each product in parallel (up to top 5 results)
   const topProducts = shoppingResults.slice(0, 5)
@@ -98,24 +105,25 @@ async function getAllRetailerOffers(brand, model, apiKey) {
 }
 
 router.post('/', async (req, res) => {
-  const shoes = req.body
+  const { shoes, gender, courtType, size } = req.body
   if (!Array.isArray(shoes) || shoes.length === 0) {
-    return res.status(400).json({ error: 'Body must be a non-empty array of shoes' })
+    return res.status(400).json({ error: 'Body must contain a non-empty shoes array' })
   }
 
+  const filters = { gender, courtType, size }
   const apiKey = process.env.SERPAPI_KEY
   const { EUR_GBP, CHF_GBP, source } = await getRates()
   const exchangeRateFallback = source === 'fallback'
 
   const shoeResults = await Promise.all(
     shoes.map(async (shoe) => {
-      const cacheKey = `${shoe.brand}::${shoe.model}`
+      const cacheKey = `${shoe.brand}::${shoe.model}::${gender || ''}::${courtType || ''}::${size || ''}`
       const cached = cache.get(cacheKey)
       if (cached) return { shoe, results: cached }
 
       let offersByDomain
       try {
-        offersByDomain = await getAllRetailerOffers(shoe.brand, shoe.model, apiKey)
+        offersByDomain = await getAllRetailerOffers(shoe.brand, shoe.model, apiKey, filters)
       } catch (err) {
         console.error(`[prices] Search failed for ${shoe.brand} ${shoe.model}: ${err.message}`)
         return { shoe, results: [] }

@@ -37,6 +37,10 @@ export default function ShoeEntryForm({ onSearch }) {
   const [showDropdown, setShowDropdown] = useState(false)
   const closeTimer = useRef(null)
 
+  const [gender, setGender] = useState('Mens')
+  const [courtType, setCourtType] = useState('All Court')
+  const [size, setSize] = useState('')
+
   const activeShoes = shoes.filter(s => s.active)
   const filtered = query.length > 0
     ? activeShoes
@@ -104,6 +108,43 @@ export default function ShoeEntryForm({ onSearch }) {
   return (
     <div className="w-full max-w-xl mx-auto px-4">
       <h2 className="text-xl font-semibold text-gray-800 mb-6">Enter your Court Shoe Finder results</h2>
+
+      {/* Filters */}
+      <div className="grid grid-cols-3 gap-3 mb-5">
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1">Gender</label>
+          <select
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option>Mens</option>
+            <option>Womens</option>
+            <option>Kids</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1">Court type</label>
+          <select
+            value={courtType}
+            onChange={(e) => setCourtType(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option>All Court</option>
+            <option>Clay</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1">Size (UK)</label>
+          <input
+            type="text"
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+            placeholder="e.g. 9.5"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
 
       {/* Search input */}
       <div className="relative mb-4">
@@ -209,7 +250,7 @@ export default function ShoeEntryForm({ onSearch }) {
       {/* Find Best Prices button */}
       {shoeList.length > 0 && (
         <button
-          onClick={() => onSearch(shoeList)}
+          onClick={() => onSearch(shoeList, { gender, courtType, size })}
           className="w-full py-4 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors text-base"
         >
           Find Best Prices

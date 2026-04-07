@@ -158,7 +158,7 @@ function ShoeCard({ shoeResult, sortBy }) {
   )
 }
 
-export default function ResultsPage({ shoeList, onReset }) {
+export default function ResultsPage({ shoeList, filters, onReset }) {
   const [results, setResults] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -172,7 +172,7 @@ export default function ResultsPage({ shoeList, onReset }) {
     fetch(`${API_BASE}/api/prices`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(shoeList),
+      body: JSON.stringify({ shoes: shoeList, ...filters }),
     })
       .then((res) => {
         if (!res.ok) throw new Error('API error')
@@ -188,7 +188,7 @@ export default function ResultsPage({ shoeList, onReset }) {
         setError(true)
         setLoading(false)
       })
-  }, [shoeList])
+  }, [shoeList, filters])
 
   useEffect(() => {
     doFetch()

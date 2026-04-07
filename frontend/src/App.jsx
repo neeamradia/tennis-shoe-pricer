@@ -6,14 +6,17 @@ import ResultsPage from './components/ResultsPage'
 export default function App() {
   const [screen, setScreen] = useState('onboarding') // 'onboarding' | 'entry' | 'results'
   const [searchList, setSearchList] = useState([])
+  const [filters, setFilters] = useState({})
 
-  const handleSearch = (shoeList) => {
+  const handleSearch = (shoeList, filterValues) => {
     setSearchList(shoeList)
+    setFilters(filterValues)
     setScreen('results')
   }
 
   const handleReset = () => {
     setSearchList([])
+    setFilters({})
     setScreen('onboarding')
   }
 
@@ -33,7 +36,7 @@ export default function App() {
         )}
 
         {screen === 'results' && (
-          <ResultsPage shoeList={searchList} onReset={handleReset} />
+          <ResultsPage shoeList={searchList} filters={filters} onReset={handleReset} />
         )}
       </main>
     </div>

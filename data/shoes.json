@@ -13,7 +13,6 @@
   { "id": "asics-court-ff-3", "brand": "ASICS", "model": "Court FF 3", "generation": "current", "active": true },
   { "id": "asics-gel-dedicate-7", "brand": "ASICS", "model": "Gel-Dedicate 7", "generation": "current", "active": true },
   { "id": "asics-gel-resolution-9", "brand": "ASICS", "model": "Gel-Resolution 9", "generation": "previous", "active": true },
-  { "id": "asics-gel-resolution-9-clay", "brand": "ASICS", "model": "Gel-Resolution 9 Clay", "generation": "previous", "active": true },
   { "id": "asics-gel-resolution-x", "brand": "ASICS", "model": "Gel-Resolution X", "generation": "current", "active": true },
   { "id": "asics-solution-speed-ff-3", "brand": "ASICS", "model": "Solution Speed FF 3", "generation": "current", "active": true },
   { "id": "asics-gel-resolution-8", "brand": "ASICS", "model": "Gel-Resolution 8", "generation": "previous", "active": false },
@@ -21,7 +20,7 @@
   { "id": "asics-gel-dedicate-8", "brand": "ASICS", "model": "Gel-Dedicate 8", "generation": "previous", "active": false },
 
   { "id": "babolat-jet-mach-3", "brand": "Babolat", "model": "Jet Mach 3", "generation": "current", "active": true },
-  { "id": "babolat-propulse-fury-ac", "brand": "Babolat", "model": "Propulse Fury All Court", "generation": "current", "active": true },
+  { "id": "babolat-propulse-fury-ac", "brand": "Babolat", "model": "Propulse Fury", "generation": "current", "active": true },
   { "id": "babolat-sfx4", "brand": "Babolat", "model": "SFX4", "generation": "previous", "active": false },
   { "id": "babolat-jet-tere", "brand": "Babolat", "model": "Jet Tere", "generation": "previous", "active": false },
 
@@ -98,7 +97,6 @@
   { "id": "nike-vapor-lite-2", "brand": "Nike", "model": "Vapor Lite 2", "generation": "previous", "active": true },
   { "id": "nike-vapor-lite-3", "brand": "Nike", "model": "Vapor Lite 3", "generation": "current", "active": true },
   { "id": "nike-vapor-pro-2", "brand": "Nike", "model": "Vapor Pro 2", "generation": "previous", "active": true },
-  { "id": "nike-vapor-pro-2-clay", "brand": "Nike", "model": "Vapor Pro 2 Clay", "generation": "previous", "active": true },
   { "id": "nike-vapor-pro-3", "brand": "Nike", "model": "Vapor Pro 3", "generation": "current", "active": true },
   { "id": "nike-supreme-courtposite", "brand": "Nike", "model": "Supreme Courtposite", "generation": "current", "active": true },
   { "id": "nike-air-zoom-vapor-pro-2", "brand": "Nike", "model": "Air Zoom Vapor Pro 2", "generation": "previous", "active": false },
