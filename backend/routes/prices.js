@@ -27,11 +27,65 @@ function extractDomain(url) {
 }
 
 /**
+ * Normalise a string for fuzzy comparison: lowercase, strip punctuation, collapse whitespace.
+ */
+function normalize(str) {
+  return str.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim()
+}
+
+/**
+ * Check that every word in the model name appears somewhere in the product title.
+ */
+function matchesModel(title, model) {
+  const normTitle = normalize(title)
+  const modelWords = normalize(model).split(' ')
+  return modelWords.every(word => normTitle.includes(word))
+}
+
+/**
+ * Reject results with contradictory gender signals.
+ * Titles with no gender keywords pass through (many listings omit gender).
+ */
+function matchesGender(title, gender) {
+  if (!gender) return true
+  const t = title.toLowerCase()
+  const hasWomens = /\bwome?n'?s?\b/.test(t)
+  const hasMens = /(?<!\bwo)\bme?n'?s?\b/.test(t)
+  const hasKids = /\b(kids?|junior|youth|boys?|girls?)\b/.test(t)
+  const g = gender.toLowerCase()
+  if (g === 'mens') return !hasWomens
+  if (g === 'womens') return !hasMens || hasWomens
+  if (g === 'kids') return hasKids || (!hasMens && !hasWomens)
+  return true
+}
+
+/**
+ * Apply model-name and gender filters to shopping results, with debug logging.
+ */
+function filterShoppingResults(results, model, gender) {
+  const filtered = results.filter(product => {
+    const title = product.title ?? ''
+    if (!matchesModel(title, model)) {
+      console.warn(`[prices] Filtered out (model mismatch): "${title}"`)
+      return false
+    }
+    if (!matchesGender(title, gender)) {
+      console.warn(`[prices] Filtered out (gender mismatch): "${title}"`)
+      return false
+    }
+    return true
+  })
+  console.warn(`[prices] ${model}: ${results.length} results → ${filtered.length} after relevance filtering`)
+  return filtered
+}
+
+/**
  * Step 1: Google Shopping search — fetches 3 pages in parallel (~30 product variants).
  */
 async function searchShopping(brand, model, apiKey, filters = {}) {
   const { gender, courtType, size } = filters
-  const parts = [brand, model]
+  const quotedModel = model.includes('"') ? model : `"${model}"`
+  const parts = [brand, quotedModel]
   if (courtType && courtType !== 'All Court') parts.push(courtType)
   if (gender) parts.push(gender)
   if (size) parts.push(`UK ${size}`)
@@ -64,10 +118,11 @@ async function fetchStores(pageToken, apiKey) {
  */
 async function getAllRetailerOffers(brand, model, apiKey, filters) {
   const shoppingResults = await searchShopping(brand, model, apiKey, filters)
+  const filteredResults = filterShoppingResults(shoppingResults, model, filters.gender)
 
   // Deduplicate by page token before fetching immersive pages
   const seenTokens = new Set()
-  const uniqueProducts = shoppingResults.filter((p) => {
+  const uniqueProducts = filteredResults.filter((p) => {
     if (!p.immersive_product_page_token) return false
     if (seenTokens.has(p.immersive_product_page_token)) return false
     seenTokens.add(p.immersive_product_page_token)
