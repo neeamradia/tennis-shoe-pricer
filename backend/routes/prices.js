@@ -27,7 +27,7 @@ function extractDomain(url) {
 }
 
 /**
- * Step 1: Google Shopping search — returns up to 5 product results for the shoe.
+ * Step 1: Google Shopping search — fetches 3 pages in parallel (~30 product variants).
  */
 async function searchShopping(brand, model, apiKey, filters = {}) {
   const { gender, courtType, size } = filters
@@ -37,14 +37,13 @@ async function searchShopping(brand, model, apiKey, filters = {}) {
   if (size) parts.push(`UK ${size}`)
   parts.push('tennis shoe')
 
-  const result = await getJson({
-    engine: 'google_shopping',
-    q: parts.join(' '),
-    gl: 'uk',
-    hl: 'en',
-    api_key: apiKey
-  })
-  return result.shopping_results ?? []
+  const q = parts.join(' ')
+  const pages = await Promise.allSettled(
+    [0, 10, 20].map((start) =>
+      getJson({ engine: 'google_shopping', q, gl: 'uk', hl: 'en', start, api_key: apiKey })
+    )
+  )
+  return pages.flatMap((p) => p.status === 'fulfilled' ? (p.value.shopping_results ?? []) : [])
 }
 
 /**
@@ -60,18 +59,23 @@ async function fetchStores(pageToken, apiKey) {
 }
 
 /**
- * For a shoe, fetch all retailer offers across the top Shopping results.
+ * For a shoe, fetch all retailer offers across Shopping results (all pages, all colorways).
  * Returns a map of domain → { listedPrice, url } keeping the lowest price per retailer.
  */
 async function getAllRetailerOffers(brand, model, apiKey, filters) {
   const shoppingResults = await searchShopping(brand, model, apiKey, filters)
 
-  // Fetch stores for each product in parallel (up to top 5 results)
-  const topProducts = shoppingResults.slice(0, 5)
+  // Deduplicate by page token before fetching immersive pages
+  const seenTokens = new Set()
+  const uniqueProducts = shoppingResults.filter((p) => {
+    if (!p.immersive_product_page_token) return false
+    if (seenTokens.has(p.immersive_product_page_token)) return false
+    seenTokens.add(p.immersive_product_page_token)
+    return true
+  })
+
   const storePages = await Promise.allSettled(
-    topProducts
-      .filter((p) => p.immersive_product_page_token)
-      .map((p) => fetchStores(p.immersive_product_page_token, apiKey))
+    uniqueProducts.map((p) => fetchStores(p.immersive_product_page_token, apiKey))
   )
 
   // Aggregate all stores; keep lowest listed price per domain
