@@ -1,0 +1,472 @@
+[
+  {
+    "domain": "tennis-point.co.uk",
+    "name": "Tennis-Point UK",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "prodirectsport.com",
+    "name": "Pro:Direct Sport",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "allthingstennis.co.uk",
+    "name": "All Things Tennis",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "tennisnuts.com",
+    "name": "Tennis Nuts",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "tennisplanet.co.uk",
+    "name": "Tennis Planet",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 40
+  },
+  {
+    "domain": "stringersworld.com",
+    "name": "Stringers World",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 40
+  },
+  {
+    "domain": "racketskingdom.com",
+    "name": "Rackets Kingdom",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 60
+  },
+  {
+    "domain": "centralsports.co.uk",
+    "name": "Central Sports UK",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "smashuk.co",
+    "name": "Smash UK",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 40
+  },
+  {
+    "domain": "just-rackets.co.uk",
+    "name": "Just Rackets",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "shop.wimbledon.com",
+    "name": "Wimbledon Shop",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 40
+  },
+  {
+    "domain": "courtsideshop.co.uk",
+    "name": "Courtside Shop",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 45
+  },
+  {
+    "domain": "new-balance.co.uk",
+    "name": "New Balance UK",
+    "type": "brand-direct",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 60
+  },
+  {
+    "domain": "tenniswarehouseeurope.com",
+    "name": "Tennis Warehouse Europe",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "tennis-point.de",
+    "name": "Tennis-Point DE",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.19,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "tennis-point.fr",
+    "name": "Tennis-Point FR",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "tennis-point.es",
+    "name": "Tennis-Point ES",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.21,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "tennis-point.it",
+    "name": "Tennis-Point IT",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.22,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "tennispro.eu",
+    "name": "TennisPro.eu",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 59
+  },
+  {
+    "domain": "extreme-tennis.eu",
+    "name": "Extreme Tennis",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 59
+  },
+  {
+    "domain": "tennisfarm.co.uk",
+    "name": "Tennis Farm",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.19,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 47
+  },
+  {
+    "domain": "tennis-zone.eu",
+    "name": "Tennis Zone",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.23,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 51
+  },
+  {
+    "domain": "centralsports.eu",
+    "name": "Central Sports EU",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 43
+  },
+  {
+    "domain": "babolat.com",
+    "name": "Babolat",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 6.99,
+    "freeShippingThresholdGBP": 69
+  },
+  {
+    "domain": "wilson.com",
+    "name": "Wilson",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.21,
+    "shippingFlatRateGBP": 6.99,
+    "freeShippingThresholdGBP": 65
+  },
+  {
+    "domain": "head.com",
+    "name": "Head",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 6.99,
+    "freeShippingThresholdGBP": 69
+  },
+  {
+    "domain": "asics.com",
+    "name": "ASICS",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.21,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "amazon.co.uk",
+    "name": "Amazon UK",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 25
+  },
+  {
+    "domain": "sportsdirect.com",
+    "name": "Sports Direct",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 75
+  },
+  {
+    "domain": "jdsports.co.uk",
+    "name": "JD Sports",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 70
+  },
+  {
+    "domain": "decathlon.co.uk",
+    "name": "Decathlon UK",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 30
+  },
+  {
+    "domain": "johnlewis.com",
+    "name": "John Lewis",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 70
+  },
+  {
+    "domain": "sportsshoes.com",
+    "name": "SportsShoes",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "wiggle.com",
+    "name": "Wiggle",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "activinstinct.co.uk",
+    "name": "Activ Instinct",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "startfitness.co.uk",
+    "name": "Start Fitness",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 40
+  },
+  {
+    "domain": "intersport.co.uk",
+    "name": "Intersport UK",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "zalando.co.uk",
+    "name": "Zalando UK",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 0,
+    "freeShippingThresholdGBP": 20
+  },
+  {
+    "domain": "asos.com",
+    "name": "ASOS",
+    "type": "general-sport",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 35
+  },
+  {
+    "domain": "migros-sport.ch",
+    "name": "Migros Sport",
+    "type": "general-sport",
+    "region": "CH",
+    "currency": "CHF",
+    "euVatRate": 0.077,
+    "shippingFlatRateGBP": 9.99,
+    "freeShippingThresholdGBP": 44
+  },
+  {
+    "domain": "nike.com",
+    "name": "Nike UK",
+    "type": "brand-direct",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "adidas.co.uk",
+    "name": "Adidas UK",
+    "type": "brand-direct",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "kswiss.com",
+    "name": "K-Swiss",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "yonex.com",
+    "name": "Yonex",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "mizuno.com",
+    "name": "Mizuno",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  },
+  {
+    "domain": "diadora.com",
+    "name": "Diadora",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.22,
+    "shippingFlatRateGBP": 6.99,
+    "freeShippingThresholdGBP": 69
+  },
+  {
+    "domain": "princesports.com",
+    "name": "Prince Sports",
+    "type": "brand-direct",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 52
+  }
+]
