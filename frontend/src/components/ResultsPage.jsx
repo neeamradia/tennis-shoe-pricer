@@ -68,9 +68,6 @@ function ShoeCard({ shoeResult, sortBy }) {
         <h2 className="text-base sm:text-lg font-semibold text-gray-900 break-words">
           {shoe.brand} {shoe.model}
         </h2>
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800 whitespace-nowrap">
-          {shoe.matchScore} / 50
-        </span>
       </div>
 
       {results.length === 0 ? (
@@ -149,9 +146,6 @@ function ShoeCard({ shoeResult, sortBy }) {
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-xs text-gray-400">
-            Prices may vary by colourway — click through to verify at retailer.
-          </p>
         </>
       )}
     </div>
@@ -179,8 +173,7 @@ export default function ResultsPage({ shoeList, filters, onReset }) {
         return res.json()
       })
       .then(({ results: shoeResults, exchangeRateFallback: fallback }) => {
-        const sorted = [...shoeResults].sort((a, b) => b.shoe.matchScore - a.shoe.matchScore)
-        setResults(sorted)
+        setResults(shoeResults)
         setExchangeRateFallback(fallback)
         setLoading(false)
       })

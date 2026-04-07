@@ -19,7 +19,7 @@ export default function OnboardingScreen({ onStart }) {
           </div>
           <p className="font-semibold text-gray-800 mb-1">Visit Court Shoe Finder</p>
           <p className="text-xs text-gray-500">
-            Answer the quiz at courtshoefinder.com and note down your recommended shoes and their match scores.
+            Answer the quiz at courtshoefinder.com and note down your recommended shoes.
           </p>
         </div>
 
