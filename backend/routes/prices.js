@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import { getJson } from 'serpapi'
 import NodeCache from 'node-cache'
 import { createRequire } from 'module'
 import { landedCost } from '../utils/landedCost.js'
@@ -80,7 +79,7 @@ function filterShoppingResults(results, model, gender) {
 }
 
 /**
- * Step 1: Google Shopping search — fetches 3 pages in parallel (~30 product variants).
+ * Fetch 3 pages of Google Shopping results from Zenserp in parallel (~30 products).
  */
 async function searchShopping(brand, model, apiKey, filters = {}) {
   const { gender, courtType, size } = filters
@@ -93,70 +92,81 @@ async function searchShopping(brand, model, apiKey, filters = {}) {
 
   const q = parts.join(' ')
   const pages = await Promise.allSettled(
-    [0, 10, 20].map((start) =>
-      getJson({ engine: 'google_shopping', q, gl: 'uk', hl: 'en', start, api_key: apiKey })
-    )
+    [1, 2, 3].map((page) => {
+      const url = new URL('https://api.scaleserp.com/search')
+      url.searchParams.set('api_key', apiKey)
+      url.searchParams.set('q', q)
+      url.searchParams.set('search_type', 'shopping')
+      url.searchParams.set('gl', 'uk')
+      url.searchParams.set('hl', 'en')
+      url.searchParams.set('page', String(page))
+      return fetch(url.toString()).then(r => r.json())
+    })
   )
   return pages.flatMap((p) => p.status === 'fulfilled' ? (p.value.shopping_results ?? []) : [])
 }
 
+const TLD_PATTERN = /\.(co\.uk|com|de|fr|es|it|ch|nl|be|at|pl|pt|se|dk|fi|no|ie)$/i
+
 /**
- * Step 2: Immersive product page — returns all individual retailer offers for one product.
+ * Resolve a ScaleSerp merchant name to a retailer config.
+ * 1. If the name looks like a domain (e.g. "Tennis-Point.co.uk"), extract and look up directly.
+ * 2. Otherwise normalize and fuzzy-match against retailer display names.
  */
-async function fetchStores(pageToken, apiKey) {
-  const result = await getJson({
-    engine: 'google_immersive_product',
-    page_token: pageToken,
-    api_key: apiKey
-  })
-  return result.product_results?.stores ?? []
+function merchantToRetailer(merchantName) {
+  if (!merchantName) return null
+
+  if (TLD_PATTERN.test(merchantName)) {
+    const domain = merchantName.toLowerCase().replace(/^www\./, '')
+    return retailerByDomain[domain] ?? null
+  }
+
+  // Handle ScaleSerp names like "ClubRacketscom" (dot missing before "com")
+  if (/[a-z]com$/i.test(merchantName) && !merchantName.includes('.')) {
+    const guessedDomain = merchantName.toLowerCase().replace(/com$/, '.com')
+    const r = retailerByDomain[guessedDomain]
+    if (r) return r
+  }
+
+  const normMerchant = normalize(merchantName)
+  const compactMerchant = normMerchant.replace(/\s+/g, '')
+  for (const retailer of retailers) {
+    const normName = normalize(retailer.name)
+    if (normName.includes(normMerchant) || normMerchant.includes(normName) ||
+        normName.replace(/\s+/g, '') === compactMerchant) {
+      return retailer
+    }
+  }
+
+  return null
 }
 
 /**
- * For a shoe, fetch all retailer offers across Shopping results (all pages, all colorways).
+ * For a shoe, fetch all retailer offers from Shopping results.
+ * Resolves retailers via merchant name — no second-phase API call needed.
  * Returns a map of domain → { listedPrice, url } keeping the lowest price per retailer.
  */
 async function getAllRetailerOffers(brand, model, apiKey, filters) {
   const shoppingResults = await searchShopping(brand, model, apiKey, filters)
   const filteredResults = filterShoppingResults(shoppingResults, model, filters.gender)
 
-  // Deduplicate by page token before fetching immersive pages
-  const seenTokens = new Set()
-  const uniqueProducts = filteredResults.filter((p) => {
-    if (!p.immersive_product_page_token) return false
-    if (seenTokens.has(p.immersive_product_page_token)) return false
-    seenTokens.add(p.immersive_product_page_token)
-    return true
-  })
-
-  const storePages = await Promise.allSettled(
-    uniqueProducts.map((p) => fetchStores(p.immersive_product_page_token, apiKey))
-  )
-
-  // Aggregate all stores; keep lowest listed price per domain
   const bestByDomain = {}
-  for (const page of storePages) {
-    if (page.status !== 'fulfilled') continue
-    for (const store of page.value) {
-      const url = store.link ?? ''
-      const domain = extractDomain(url)
-      if (!domain) continue
+  for (const product of filteredResults) {
+    const retailer = merchantToRetailer(product.merchant)
+    if (!retailer) {
+      console.warn(`[prices] No retailer match for merchant: "${product.merchant}"`)
+      continue
+    }
 
-      const retailer = retailerByDomain[domain]
-      if (!retailer) continue
+    const listedPrice = typeof product.price === 'number'
+      ? product.price
+      : parseFloat(String(product.price ?? '').replace(/[^0-9.]/g, ''))
+    if (!listedPrice || isNaN(listedPrice)) continue
 
-      const inStock = store.details_and_offers?.some((d) =>
-        /in stock/i.test(d)
-      ) ?? true // assume in stock if not explicitly stated
-
-      if (!inStock) continue
-
-      const listedPrice = store.extracted_price ?? parseFloat(String(store.price ?? '').replace(/[^0-9.]/g, ''))
-      if (!listedPrice || isNaN(listedPrice)) continue
-
-      if (!bestByDomain[domain] || listedPrice < bestByDomain[domain].listedPrice) {
-        bestByDomain[domain] = { listedPrice, url, retailer }
-      }
+    const domain = retailer.domain
+    const url = `https://${domain}`
+    if (!bestByDomain[domain] || listedPrice < bestByDomain[domain].listedPrice) {
+      bestByDomain[domain] = { listedPrice, url, retailer }
     }
   }
 
@@ -170,7 +180,7 @@ router.post('/', async (req, res) => {
   }
 
   const filters = { gender, courtType, size }
-  const apiKey = process.env.SERPAPI_KEY
+  const apiKey = process.env.SCALESERP_KEY
   const { EUR_GBP, CHF_GBP, source } = await getRates()
   const exchangeRateFallback = source === 'fallback'
 

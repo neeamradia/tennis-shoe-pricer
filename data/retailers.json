@@ -130,6 +130,86 @@
     "freeShippingThresholdGBP": 60
   },
   {
+    "domain": "racketstation.co.uk",
+    "name": "Racketstation",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "directsportseshop.co.uk",
+    "name": "Direct Sports",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "directtennis.co.uk",
+    "name": "Direct Tennis",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "clubrackets.com",
+    "name": "Club Rackets",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 3.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
+    "domain": "withersonline.com",
+    "name": "Withers Sports",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 75
+  },
+  {
+    "domain": "ph-tennis.co.uk",
+    "name": "PH Tennis",
+    "type": "tennis-specialist",
+    "region": "UK",
+    "currency": "GBP",
+    "euVatRate": 0,
+    "shippingFlatRateGBP": 4.99,
+    "freeShippingThresholdGBP": 100
+  },
+  {
+    "domain": "smashinn.com",
+    "name": "Smashinn",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.21,
+    "shippingFlatRateGBP": 5.99,
+    "freeShippingThresholdGBP": 128
+  },
+  {
+    "domain": "sportsprofi.com",
+    "name": "Sportsprofi",
+    "type": "tennis-specialist",
+    "region": "EU",
+    "currency": "EUR",
+    "euVatRate": 0.20,
+    "shippingFlatRateGBP": 6.99,
+    "freeShippingThresholdGBP": 50
+  },
+  {
     "domain": "tenniswarehouseeurope.com",
     "name": "Tennis Warehouse Europe",
     "type": "tennis-specialist",
